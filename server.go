@@ -9,6 +9,7 @@ func StartServer() error {
 
 	router.GET("/ping", Ping)
 	router.POST("/evaluate", EvaluateBoard)
+	router.POST("/move", MakeMove)
 
 	return router.Run(":8001")
 
@@ -23,4 +24,13 @@ func EvaluateBoard(c *gin.Context) {
 	c.BindJSON(&board)
 	eval := board.EvaluateBoard()
 	c.JSON(200, eval)
+}
+
+func MakeMove(c *gin.Context) {
+	var board Board
+	c.BindJSON(&board)
+	pos := board.CalculateNextMove()
+	c.JSON(200, gin.H{
+		"pos": pos,
+	})
 }

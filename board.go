@@ -1,6 +1,6 @@
 package main
 
 type Board struct {
-	board []int `json:"board"`
-	turn  int   `json:"turn"`
+	Board []int `json:"board"`
+	Turn  int   `json:"turn"`
 }
